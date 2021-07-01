@@ -10,7 +10,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-if os.environ["PRODUCTION"] == True:
+if os.environ["PRODUCTION"] == "True":
     slack_event_adapter = SlackEventAdapter(os.environ["SLACK_SECRET"],'/slack/events',app)
     client = slack_sdk.WebClient(token=os.environ["SLACK_TOKEN"])
     host = '0.0.0.0'
