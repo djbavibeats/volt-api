@@ -9,9 +9,12 @@ from slackeventsapi import SlackEventAdapter
 config = dotenv_values(".env")
 
 app = Flask(__name__)
-slack_event_adapter = SlackEventAdapter(config["SLACK_SECRET"],'/slack/events',app)
+# slack_event_adapter = SlackEventAdapter(config["SLACK_SECRET"],'/slack/events',app)
+slack_event_adapter = SlackEventAdapter(os.environ["SLACK_SECRET"],'/slack/events',app)
 
-client = slack_sdk.WebClient(token=config["SLACK_TOKEN"])
+# client = slack_sdk.WebClient(token=config["SLACK_TOKEN"])
+client = slack_sdk.WebClient(token=os.environ["SLACK_TOKEN"])
+
 BOT_ID = client.api_call('auth.test')['user_id']
 
 print(config)
