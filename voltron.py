@@ -21,7 +21,7 @@ print(config)
 
 @app.route('/')
 def warning():
-    return "you shouldn't be here..."
+    return "<div style='text-align: center; margin: 0 auto;'><img src='https://www.dropbox.com/s/ogtx35aiia317ye/steve%21.jpg?dl=0' /><h3>you shouldn't be here...</h3></div>"
 
 @app.route("/send-message", methods=['POST'])
 def send_message():
