@@ -1,1 +1,1 @@
-web: python voltron.py runserver 0.0.0.0:5000
+web: python voltron.py
