@@ -3,15 +3,12 @@ import os
 import json
 from pathlib import Path
 from flask import Flask, request, Response
-from dotenv import dotenv_values, load_dotenv
+from dotenv import load_dotenv
 from slackeventsapi import SlackEventAdapter
 
 load_dotenv()
-config = dotenv_values(".env")
 
 app = Flask(__name__)
-
-print(os.environ["PRODUCTION"])
 
 if os.environ["PRODUCTION"] == True:
     slack_event_adapter = SlackEventAdapter(os.environ["SLACK_SECRET"],'/slack/events',app)
@@ -24,7 +21,7 @@ else:
 
 BOT_ID = client.api_call('auth.test')['user_id']
 
-print(config)
+print(os.environ)
 
 @app.route('/')
 def warning():
