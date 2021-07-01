@@ -21,7 +21,7 @@ else:
 
 BOT_ID = client.api_call('auth.test')['user_id']
 
-print(os.environ)
+print(host)
 
 @app.route('/')
 def warning():
