@@ -20,8 +20,8 @@ BOT_ID = client.api_call('auth.test')['user_id']
 print(config)
 
 @app.route('/')
-def hello():
-    return 'Hello, World!'
+def warning():
+    return "you shouldn't be here..."
 
 @app.route("/send-message", methods=['POST'])
 def send_message():
