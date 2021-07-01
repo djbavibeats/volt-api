@@ -26,7 +26,7 @@ print(config)
 
 @app.route('/')
 def warning():
-    return "<div style='height: 100vh; display: flex; flex-direction: column; justify-content: center; text-align: center; margin: 0 auto;'><img style='width: 65%; margin: 0 auto;' src='https://previews.dropbox.com/p/thumb/ABNkfTnO0XCrAYYpqQ4dVxhaqordD1In-fbI7tx_MNOgeB-ILyt9r-hcuMgKX4hR9KLsMG9XA870e2zqJxZmUOAa9ecWd_ZqsePJCsf5FRspiU-iHDQQph3XEF2R9lrK4VpWEBSAq7eAtdYPyIeJovFBtKlBiqhddBUpsyPLjcBYNS8tDHNj-k-YX9BXePgG4O433cMeoUDMhG3kihcc1IvdiXZjI7qTJ5XNgdz-VChCzCVY8OxZlK0-Qdu9v7uTUfJA4RvhGB2dKMuvphYF8qMlnCDD3DIiZviojCatW-CKlc5zTw3aE5mAX3J2uwXbjCobNK3tX8L5Jqp23EJiEL4gRTmrZi0cEs2svHIJ7MW6Aw/p.jpeg?fv_content=true&size_mode=5' /><h1>you shouldn't be here...</h1></div>"
+    return "<div style='overflow: hidden; height: 100vh; display: flex; flex-direction: column; justify-content: center; text-align: center; margin: 0 auto;'><img style='width: 65%; margin: 0 auto;' src='https://previews.dropbox.com/p/thumb/ABNkfTnO0XCrAYYpqQ4dVxhaqordD1In-fbI7tx_MNOgeB-ILyt9r-hcuMgKX4hR9KLsMG9XA870e2zqJxZmUOAa9ecWd_ZqsePJCsf5FRspiU-iHDQQph3XEF2R9lrK4VpWEBSAq7eAtdYPyIeJovFBtKlBiqhddBUpsyPLjcBYNS8tDHNj-k-YX9BXePgG4O433cMeoUDMhG3kihcc1IvdiXZjI7qTJ5XNgdz-VChCzCVY8OxZlK0-Qdu9v7uTUfJA4RvhGB2dKMuvphYF8qMlnCDD3DIiZviojCatW-CKlc5zTw3aE5mAX3J2uwXbjCobNK3tX8L5Jqp23EJiEL4gRTmrZi0cEs2svHIJ7MW6Aw/p.jpeg?fv_content=true&size_mode=5' /><h1>you shouldn't be here...</h1></div>"
 
 @app.route("/send-message", methods=['POST'])
 def send_message():
