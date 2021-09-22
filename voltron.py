@@ -115,6 +115,20 @@ def get_by_username():
 # END USER ROUTES
 
 # PROJECT ROUTES
+@app.route("/projects", methods=['GET'])
+def get_all_projects():
+    projects = db.session.query(Project).all()
+    jsonProjects = []
+
+    for project in projects:
+        jsonProject = object_as_dict(project)
+        jsonProjects.append(jsonProject)
+
+    print(jsonProjects)
+    return jsonify(
+        projects=jsonProjects
+    )
+
 @app.route("/projects/create", methods=['POST'])
 def create_project():
     data = json.loads(str(request.data, encoding='utf-8'))
