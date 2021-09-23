@@ -18,8 +18,18 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:Aoc!8314@localhost/onboarding'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://doadmin:UmZ_Xk-eZwYldl7z@volt-onboarding-do-user-9874080-0.b.db.ondigitalocean.com:25060/onboarding?ssl-mode=REQUIRED'
+if os.environ["PRODUCTION"] == "True":
+    # slack_event_adapter = SlackEventAdapter(os.environ["SLACK_SECRET"],'/slack/events',app)
+    # client = slack_sdk.WebClient(token=os.environ["SLACK_TOKEN"])
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://doadmin:UmZ_Xk-eZwYldl7z@volt-onboarding-do-user-9874080-0.b.db.ondigitalocean.com:25060/onboarding'
+    host = '0.0.0.0'
+else:
+    # slack_event_adapter = SlackEventAdapter(os.environ["SLACK_SECRET"],'/slack/events',app)
+    # client = slack_sdk.WebClient(token=os.environ["SLACK_TOKEN"])
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:Aoc!8314@localhost/onboarding'
+    host = '127.0.0.1'
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://doadmin:UmZ_Xk-eZwYldl7z@volt-onboarding-do-user-9874080-0.b.db.ondigitalocean.com:25060/onboarding?ssl-mode=REQUIRED'
 app.config['SECRET_KEY'] = "my super secret key that no one is supposed to know"
 db = SQLAlchemy(app)
 
@@ -58,14 +68,7 @@ class User(db.Model, UserMixin, SerializerMixin):
 
 CORS(app)
 
-if os.environ["PRODUCTION"] == "True":
-    # slack_event_adapter = SlackEventAdapter(os.environ["SLACK_SECRET"],'/slack/events',app)
-    # client = slack_sdk.WebClient(token=os.environ["SLACK_TOKEN"])
-    host = '0.0.0.0'
-else:
-    # slack_event_adapter = SlackEventAdapter(os.environ["SLACK_SECRET"],'/slack/events',app)
-    # client = slack_sdk.WebClient(token=os.environ["SLACK_TOKEN"])
-    host = '127.0.0.1'
+
 
 # BOT_ID = client.api_call('auth.test')['user_id']
 
