@@ -117,6 +117,7 @@ def get_by_username():
 # PROJECT ROUTES
 @app.route("/projects", methods=['GET'])
 def get_all_projects():
+    data = json.loads(str(request.data, encoding='utf-8'))
     projects = db.session.query(Project).all()
     jsonProjects = []
 
