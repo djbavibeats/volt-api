@@ -3,20 +3,58 @@ import os
 import json
 from pathlib import Path
 from flask import Flask, request, Response, jsonify
+from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_login import login_user, logout_user, current_user
 from dotenv import load_dotenv
 # from slackeventsapi import SlackEventAdapter
-from db.models import User, Project
-from db import db
+from flask_login import UserMixin
+from sqlalchemy_serializer import SerializerMixin
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import inspect, update
 
 load_dotenv()
 
-from db import create_app
+app = Flask(__name__)
 
-app = create_app()
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:Aoc!8314@localhost/onboarding'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://doadmin:UmZ_Xk-eZwYldl7z@volt-onboarding-do-user-9874080-0.b.db.ondigitalocean.com:25060/onboarding?ssl-mode=REQUIRED'
+app.config['SECRET_KEY'] = "my super secret key that no one is supposed to know"
+db = SQLAlchemy(app)
+
+class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    project_name = db.Column(db.String(150))
+    description = db.Column(db.String(150))
+    ecommerce = db.Column(db.Boolean)
+    domain = db.Column(db.String(150))
+    domain_provider = db.Column(db.String(150))
+    domain_email = db.Column(db.String(150))
+    domain_username = db.Column(db.String(150))
+    domain_password = db.Column(db.String(150))
+    hosting = db.Column(db.String(150))
+    hosting_email = db.Column(db.String(150))
+    hosting_username = db.Column(db.String(150))
+    hosting_password = db.Column(db.String(150))
+    web_platform = db.Column(db.String(150))
+    web_platform_email = db.Column(db.String(150))
+    web_platform_username = db.Column(db.String(150))
+    web_platform_password = db.Column(db.String(150))
+    socials = db.Column(db.String(150))
+    pages = db.Column(db.String(150))
+    # Pages
+    # Analytics
+    # Integrations
+    # Billing Information
+
+class User(db.Model, UserMixin, SerializerMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(150), unique=True)
+    password = db.Column(db.String(150))
+    projects = db.relationship('Project')
 
 CORS(app)
 
