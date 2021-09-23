@@ -98,6 +98,18 @@ def object_as_dict(obj):
                 
 
 # USER ROUTES
+@app.route("/users", methods=['GET'])
+def get_all_users():
+    users = db.session.query(User).all()
+
+    jsonUser = object_as_dict(users)
+
+    return jsonify(
+        id= jsonUser['id'],
+        username= jsonUser['username'],
+        email= jsonUser['email']
+    )
+
 @app.route("/users/get-by-username", methods=['POST'])
 def get_by_username():
     data = json.loads(str(request.data, encoding='utf-8'))
