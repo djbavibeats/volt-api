@@ -56,6 +56,7 @@ class Project(db.Model):
     web_platform_password = db.Column(db.String(150))
     socials = db.Column(db.String(150))
     pages = db.Column(db.String(150))
+    sections = db.Column(db.String(1000))
     # Pages
     # Analytics
     # Integrations
@@ -189,7 +190,8 @@ def get_all_projects():
 def create_project():
     data = json.loads(str(request.data, encoding='utf-8'))
 
-    new_project = Project(project_name=data['project_name'], user_id=data['user_id'], domain=data['domain'], hosting=data['hosting'], web_platform=data['web_platform'], description=data['description'])
+    print(data)
+    new_project = Project(project_name=data['project_name'], user_id=data['user_id'], domain=data['domain'], hosting=data['hosting'], web_platform=data['web_platform'], description=data['description'], sections=data['sections'])
     db.session.add(new_project)
     db.session.commit()
 
